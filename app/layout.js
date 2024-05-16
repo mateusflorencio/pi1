@@ -4,6 +4,7 @@ import "./globals.css"
 import { AntdRegistry } from '@ant-design/nextjs-registry'
 import { useRouter } from 'next/navigation'
 import { Layout, Menu, Button } from 'antd'
+import Link from 'next/link'
 
 const { Header } = Layout
 
@@ -23,7 +24,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <AntdRegistry>
           <Header style={{ display: 'flex', alignItems: 'center' }}>
-            <div className="demo-logo" />
+            <Link className="text-white" href="/">
+              P1
+            </Link>
             <Menu
               theme="dark"
               mode="horizontal"
@@ -36,8 +39,8 @@ export default function RootLayout({ children }) {
             />
 
             <Button
-              onClick={()=> router.push('/quiz')}
-              type="primary">Fazer Quiz</Button>
+              onClick={() => router.push('/quiz')}
+              type="primary">Fazer quizz</Button>
           </Header>
           {children}
 

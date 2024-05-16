@@ -1,58 +1,38 @@
 'use client'
-import { Layout, theme, Button, Form, Checkbox, Row, Col, Progress, Typography } from 'antd'
+import { Layout, Typography, Image, Button } from 'antd'
+import Link from 'next/link'
 
 const { Content, } = Layout
 const { Title } = Typography
 
 export default function Home() {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken()
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Content style={{ padding: '0 48px' }}>
-        <Form
-          layout="vertical"
+    <Layout style={{ height: '100vh' }}>
+      <Content>
+        <Title
           style={{
-            backgroundColor: colorBgContainer,
-            borderRadius: borderRadiusLG,
-            padding: '24px',
-            marginBottom: '24px',
-            marginTop: '24px',
+            display: 'flex',
+            position: 'absolute',
+            top: '40%',
+            zIndex: 1,
+            color: 'white',
+            padding: '100px',
           }}
-        >
-          <Title level={1}>Perguntas</Title>
-          <Form.Item label="Escolha uma ou mais opções">
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                <Col span={24}>
-                  <Checkbox value="opcao1">Opção 1</Checkbox>
-                </Col>
-                <Col span={24}>
-                  <Checkbox value="opcao2">Opção 2</Checkbox>
-                </Col>
-                <Col span={24}>
-                  <Checkbox value="opcao3">Opção 3</Checkbox>
-                </Col>
-                <Col span={24}>
-                  <Checkbox value="opcao4">Opção 4</Checkbox>
-                </Col>
-              </Row>
-            </Checkbox.Group>
-          </Form.Item>
-          <Form.Item>
-            <Row justify="space-between">
-              <Button type="default">
-                Anterior
-              </Button>
-              <Button type="primary" htmlType="submit">
-                Próxima
-              </Button>
-            </Row>
-          </Form.Item>
-        </Form>
-
-        <Progress percent={10} showInfo={false} size={['small', 15]} />
+          level={1}>Proteja seus dados, proteja seu mundo: navegue com segurança e confiança na era digital.
+        </Title>
+        <Button
+          size="large"
+          type="primary"
+          style={{ position: 'absolute', top: '80%', zIndex: 1, left: '50%', transform: 'translate(-50%, -50%)' }}>
+          <Link href="/quiz">
+            Fazer quizz
+          </Link>
+        </Button>
+        <Image
+          width={'100%'}
+          src="/home.png"
+          preview={false}
+        />
       </Content>
     </Layout>
   )
