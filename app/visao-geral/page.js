@@ -20,8 +20,8 @@ export default function Home() {
       <Content style={{ padding: '0 48px' }}>
 
         <Row justify={'center'} style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <Title level={2}>{resume?.median}% de acertos</Title>
-          <Procentagem porcentagem={resume?.median} />
+          <Title level={2}>{resume?.median && Math.round(resume?.median)}% de acertos</Title>
+          <Procentagem porcentagem={resume?.median && Math.round(resume?.median)} />
         </Row>
 
         <Row justify={'center'} style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

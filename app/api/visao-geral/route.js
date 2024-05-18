@@ -9,7 +9,6 @@ export async function GET() {
 
 export async function POST(request) {
   const data = await request.json()
-  console.log(data)
   const result = await prisma.result.findFirst()
   
   await prisma.result.update({
