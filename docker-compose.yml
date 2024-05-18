@@ -1,0 +1,39 @@
+version: "3.4"
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgresp1
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=SenhaSegura2024
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - default
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4G
+        reservations:
+          cpus: "1"
+          memory: 2G
+  pgadmin:
+    container_name: pgadminp1
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: email@email.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "8080:80"
+    networks:
+      - default
+
+volumes:
+  postgres-data:
+# Path: docker-compose.yml

@@ -1,5 +1,5 @@
 'use client'
-import { Layout, theme, Button, Form, Checkbox, Row, Col, Progress, Typography, Radio } from 'antd'
+import { Layout, theme, Button, Form, Row, Col, Progress, Typography, Radio } from 'antd'
 import perguntas from './perguntas'
 import { useEffect, useState } from 'react'
 import Procentagem from '../component/Porcentagem'
@@ -7,6 +7,16 @@ import resultados from './resultados'
 
 const { Content, } = Layout
 const { Title, Paragraph } = Typography
+
+async function salvarResultado(data) {
+  return fetch('/api/visao-geral', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then((res) => res.json())
+}
 
 
 export default function Home() {
@@ -41,10 +51,10 @@ export default function Home() {
       if (pergunta.opcaoCerta === value) novoResultado += pergunta.pontuacao
       else erradas.push(key)
     })
-    console.log(erradas)
     setErradas(erradas)
     setResultado(novoResultado)
   }, [selecionados, perguntas])
+
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -89,14 +99,31 @@ export default function Home() {
                   type="default">
                   Anterior
                 </Button>
-                <Button
-                  onClick={() => {
-                    setProgress((perguntaAtual + 1) / perguntas.length * 100)
-                    setPerguntaAtual(perguntaAtual + 1)
-                  }}
-                  type="primary" htmlType="submit">
-                  {progress >= 100 ? 'Ver resultado' : 'Próxima'}
-                </Button>
+
+
+                {
+                  progress >= 100
+                    ? <Button
+                      onClick={() => {
+                        setProgress((perguntaAtual + 1) / perguntas.length * 100)
+                        setPerguntaAtual(perguntaAtual + 1)
+                        salvarResultado({ pontuacao: resultado })
+                      }}
+                      type="primary">
+                      Ver resultado
+                    </Button>
+
+
+                    : <Button
+                      onClick={() => {
+                        setProgress((perguntaAtual + 1) / perguntas.length * 100)
+                        setPerguntaAtual(perguntaAtual + 1)
+                      }}
+                      type="primary">
+                      Próxima
+                    </Button>
+                }
+
               </Row>
             </Form.Item>
             <Progress percent={progress} showInfo={false} size={['small', 15]} />
